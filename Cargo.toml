@@ -1,0 +1,22 @@
+[package]
+name = "mob"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.71"
+bson = { version = "2.6.1", features = ["chrono", "chrono-0_4"] }
+chashmap = "2.2.2"
+chrono = "0.4.24"
+chrono-tz = "0.8.2"
+dotenv = "0.15.0"
+moka = { version = "0.11.0", features = ["future"] }
+mongodb = "2.5.0"
+rand = "0.8.5"
+reqwest = { version = "0.11.17", features = ["json"] }
+serde = { version = "1.0.163", features = ["derive"] }
+serde_json = "1.0.96"
+serenity = { version = "0.11.5", features = ["utils", "collector"] }
+tokio = { version = "1.28.1", features = ["full"] }

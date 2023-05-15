@@ -1,0 +1,42 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  mob-test
+  namespace: test
+  labels:
+    app:  mob-test
+spec:
+  selector:
+    matchLabels:
+      app: mob-test
+
+  replicas: 1
+
+  template:
+    metadata:
+      labels:
+        app:  mob-test
+    spec:
+      containers:
+      - name:  mob-test
+        image: ricardorm0/mob:latest
+        imagePullPolicy: Always
+        env:
+        - name: DISCORD_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: mob-test
+              key: DISCORD_TOKEN
+
+        - name: MONGO_HOST
+          valueFrom:
+            secretKeyRef:
+              name: mob-test
+              key: MONGO_HOST
+
+        - name: MOVIE_DB_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: mob-test
+              key: MOVIE_DB_API_KEY
