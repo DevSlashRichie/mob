@@ -6,6 +6,7 @@ mod utils;
 mod listener;
 mod query_handler;
 pub mod actions;
+mod slash_commands;
 
 use std::env;
 

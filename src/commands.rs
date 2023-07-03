@@ -1,7 +1,7 @@
 use chrono::{DateTime, Utc, NaiveDateTime};
 use serenity::{framework::standard::{macros::{group, command}, CommandResult}, prelude::{Context}, model::prelude::{Message, UserId}};
 
-use crate::{utils::{self}, repo, actions};
+use crate::{utils::{self}, repo, actions, slash_commands};
 
 const DANIEL_PROXD: &UserId = &UserId(452644418995093526);
 const DEV_SLASH_RICHIE: &UserId = &UserId(894381937651765279);
@@ -36,6 +36,19 @@ pub async fn add(ctx: &Context, msg: &Message) -> CommandResult {
     actions::handle_create(ctx, &query, msg.channel_id).await;
 
     CommandResult::Ok(())
+}
+
+#[command]
+pub async fn register_commands(ctx: &Context, msg: &Message) -> CommandResult {
+    if !check_owner(ctx, msg).await {
+        return Ok(());
+    }
+
+    if let Some(guild) = msg.guild_id {
+        slash_commands::register_commands(ctx, &guild).await;
+    }
+
+    Ok(())
 }
 
 #[command]
